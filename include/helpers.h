@@ -1,4 +1,4 @@
-//! helpers.h 
+//! include/helpers.h 
 
 
 #ifndef VEX_HELPERS_H
@@ -28,31 +28,5 @@ static inline float asfloat(uint32_t i) {
 
     return u.f; 
 }
-
-/// Benchmarks a function involving `float`s and returns the elapsed time. 
-static inline double benchmark_float( 
-    float x, 
-    float (*function)(float), 
-    size_t iterations
-) { 
-    volatile float input = x; 
-    volatile float result; 
-
-    // warm-up 
-    for (size_t i = 0; i < 10000000; i++) {
-        result = function(input);
-    }
-
-    clock_t beg = clock(); 
-    for (size_t i = 0; i < iterations; i++) { 
-        result = function(input); 
-    }
-    clock_t end = clock(); 
-
-    (void) result; 
-
-    return ((double)(end - beg) / CLOCKS_PER_SEC)/(double) iterations; 
-}
-
 
 #endif 

@@ -1,4 +1,4 @@
-//! vex.h 
+//! include/vex.h 
 //! 
 //! all functions and types. 
 

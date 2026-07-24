@@ -1,6 +1,6 @@
 //! scalar/expf.c  
 //! 
-//! scalar implementation of the `expf` function. 
+//! scalar implementation of `expf(x)`. 
 
 
 #include "vex.h"

@@ -1,6 +1,6 @@
 //! vectorized/expf.c 
 //! 
-//! Vectorized implementation of `expf(x)`. 
+//! vectorized implementation of `expf(x)`. 
 
 
 #include "vex.h" 

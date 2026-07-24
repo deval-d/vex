@@ -1,7 +1,9 @@
-//! test_expf_scalar.c 
+//! tests/expf.c 
+
 
 #include "vex.h"
 #include "test_helpers.h" 
+
 
 int scalar(float* inputs, size_t n) { 
     size_t num_failures = 0; 
