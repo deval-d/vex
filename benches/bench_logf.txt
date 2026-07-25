@@ -1,0 +1,4 @@
+
+scalar
+scalar vex logf:  3.359 ns
+scalar math logf: 2.878 ns

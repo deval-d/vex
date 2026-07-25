@@ -108,7 +108,7 @@ void vectorized(uint64_t n_samples) {
 
 
 int main(void) { 
-    uint64_t n_samples = 100000000; 
+    uint64_t n_samples = 1000000000; 
 
     printf("\nscalar expf\n"); 
     scalar(n_samples); 

@@ -23,7 +23,7 @@ typedef struct {
 
 // scalar functions
 
-/// Computes e^x in parallel for multiple x. 
+/// Computes e^x. 
 ///
 /// Reduces the problem to
 ///
@@ -34,6 +34,17 @@ typedef struct {
 /// 2^r is approximated using a degree-5 minimax polynomial. 
 float vex_expf(float x);
 
+
+/// Computes ln(x) 
+///
+/// Reduces the problem to 
+///
+///     ln(x) = ln(2^(e + 1)) + ln(f), 
+///
+/// where e is the true exponent of x, and f is the mantissa divided by two. 
+/// ln(2^(e + 1)) is approximated using `double`s. 
+/// ln(f) is approximated using a degree-8 minimax polynomial.
+float vex_logf(float x); 
 
 // vectorized functions 
 

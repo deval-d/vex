@@ -31,28 +31,21 @@ float vex_expf(float x) {
     if (x > OVERFLOW_BOUND) return INFINITY; 
     if (x < UNDERFLOW_BOUND) return 0.0f; 
 
-    double xlog2e;     
-    double kd;         
-    int32_t k;        
-    float r;          
-    float two_k;      
-    float two_r;      
-
-    xlog2e = (double) x * LOG2E; 
+    double xlog2e = (double) x * LOG2E; 
 
     // integer part of x log_2(e)
-    kd = round(xlog2e); 
-    k = (int32_t) kd;
+    double kd = round(xlog2e); 
+    int32_t k = (int32_t) kd;
 
     // fractional part of x log_2(e) in [-0.5, 0.5]
-    r = (float) (xlog2e - kd); 
+    float r = (float) (xlog2e - kd); 
     
     // evaluating 2^k
-    two_k = asfloat(((uint32_t)(k + 127) << 23)); 
+    float two_k = asfloat(((uint32_t)(k + 127) << 23)); 
 
     // evaluating 2^r 
     // minimax polynomial in Horner's form 
-    two_r = fmaf(r, c5, c4); 
+    float two_r = fmaf(r, c5, c4); 
     two_r = fmaf(r, two_r, c3);
     two_r = fmaf(r, two_r, c2); 
     two_r = fmaf(r, two_r, c1); 
