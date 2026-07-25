@@ -1,9 +1,9 @@
 
 scalar
-scalar vex expf:  3.362 ns
-scalar math expf: 2.397 ns
+scalar vex expf:  2.877 ns
+scalar math expf: 2.411 ns
 
 vectorized
 vector length:     4096
-vex vexpf:         2.115 us, 0.516 ns/element
-accelerate vvexpf: 2.714 us, 0.663 ns/element
+vex vexpf:         2.124 us, 0.518 ns/element
+accelerate vvexpf: 2.718 us, 0.663 ns/element
