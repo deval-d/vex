@@ -3,6 +3,9 @@
 
 #include "vex.h"
 #include "test_helpers.h" 
+#include <stdio.h>
+#include <stdlib.h>
+#include <Accelerate/Accelerate.h>
 
 
 int scalar(float* inputs, size_t n) { 
