@@ -152,9 +152,9 @@ static inline void display_ulp_report(ULPReport* report) {
         float percent = 100.0f * (float) count / (float) n_samples; 
 
         if (ulp == MAX_ULP) { 
-            printf("%-10s %12zu %5.5f%%\n", "256+", count, percent); 
+            printf("%-6s %-12zu %f%%\n", "256+", count, percent); 
         } else { 
-            printf("%-10zu %12zu %5.5f%%\n", ulp, count, percent); 
+            printf("%-6zu %-12zu %f%%\n", ulp, count, percent); 
         }
     }
     printf("total samples: %" PRIu64 "\n", n_samples); 

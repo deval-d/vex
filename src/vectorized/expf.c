@@ -1,6 +1,7 @@
 //! vectorized/expf.c 
 //! 
-//! vectorized implementation of `expf(x)`. 
+//! vectorized implementation of `expf`; 
+//! evaluates several in parallel. 
 
 
 #include "vex.h" 
