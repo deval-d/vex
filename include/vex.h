@@ -49,7 +49,7 @@ float vex_expf(float x);
 ///
 /// args: 
 /// * [FloatVectorRef] v - input vector of x 
-/// * [FloatVectorMut] v - will store output vector of e^x 
+/// * [FloatVectorMut] out - will store output vector of e^x 
 void vex_vexpf(FloatVectorRef v, FloatVectorMut out); 
 
 

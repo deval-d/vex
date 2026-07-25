@@ -137,8 +137,8 @@ static inline void display_ulp_report(ULPReport* report) {
 
     printf("maximum ULP: %" PRIu32 "\n", report -> max_ulp);
     printf("from input: %f\n", report -> worst_x); 
-    printf("vex measurement: %f\n", report -> worst_vex); 
-    printf("lib measurement: %f\n", report -> worst_lib); 
+    printf("vex measurement: %.9e\n", report -> worst_vex);
+    printf("lib measurement: %.9e\n", report -> worst_lib);
 
     uint64_t n_samples = report -> n_samples; 
     printf("ulp distribution\n"); 
