@@ -64,4 +64,16 @@ float vex_logf(float x);
 void vex_vexpf(FloatVectorRef v, FloatVectorMut out); 
 
 
+/// Computes ln(x) in parallel for multiple x. 
+///
+/// Reduces the problem to 
+///
+///     ln(x) = ln(2^(e + 1)) + ln(f), 
+///
+/// where e is the true exponent of x, and f is the mantissa divided by two. 
+/// ln(2^(e + 1)) is approximated using `double`s. 
+/// ln(f) is approximated using a degree-8 minimax polynomial.
+void vex_vlogf(FloatVectorRef v, FloatVectorMut out); 
+
+
 #endif

@@ -1,6 +1,6 @@
 //! vectorized/expf.c 
 //! 
-//! vectorized implementation of `expf`; 
+//! vectorized implementation of `expf(x)` 
 //! evaluates several in parallel. 
 
 
@@ -45,7 +45,7 @@ void vex_vexpf(
     float* chunks_out = out.data; 
     float* tail_out   = out.data + chunk_count * LANES; 
 
-    // fixed-size chunks; SIMD optimized 
+    // fixed size chunks; SIMD-optimized 
     float32x4_t log2ev     = vdupq_n_f32(LOG2E); 
     float32x4_t overflowv  = vdupq_n_f32(OVERFLOW_BOUND); 
     float32x4_t underflowv = vdupq_n_f32(UNDERFLOW_BOUND); 
