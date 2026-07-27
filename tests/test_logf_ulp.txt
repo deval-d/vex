@@ -1,0 +1,28 @@
+
+scalar logf
+maximum ULP: 4
+from input: 0.633905
+vex measurement: -4.558562934e-01
+lib measurement: -4.558561742e-01
+ulp distribution
+0      97587683     97.587685%
+1      2261697      2.261697%
+2      129921       0.129921%
+3      20441        0.020441%
+4      258          0.000258%
+total samples: 100000000
+
+vectorized logf
+maximum ULP: 6
+from input: 0.984666
+vex measurement: -1.545243245e-02
+lib measurement: -1.545242686e-02
+ulp distribution
+0      59938684     59.938683%
+1      38737686     38.737686%
+2      1299853      1.299853%
+3      21768        0.021768%
+4      1865         0.001865%
+5      143          0.000143%
+6      1            0.000001%
+total samples: 100000000
