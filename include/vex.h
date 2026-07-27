@@ -6,6 +6,7 @@
 #ifndef VEX_H 
 #define VEX_H 
 
+
 #include <stddef.h> 
 
 
@@ -45,6 +46,12 @@ float vex_expf(float x);
 /// ln(2^(e + 1)) is approximated using `double`s. 
 /// ln(f) is approximated using a degree-8 minimax polynomial.
 float vex_logf(float x); 
+
+
+/// Computes sin(x) 
+float vex_sinf(float x);
+
+
 
 // vectorized functions 
 
