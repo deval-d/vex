@@ -99,5 +99,34 @@ static inline void benchmark_accelerate_vexpf(
     vvexpf(output, input, &count);
 }
 
+static inline void benchmark_vex_vlogf(
+    const float *input,
+    float *output,
+    size_t len
+) {
+    FloatVectorRef in = {
+        .data = input,
+        .len = len,
+    };
+
+    FloatVectorMut out = {
+        .data = output,
+        .len = len,
+    };
+
+    vex_vlogf(in, out);
+
+}
+
+static inline void benchmark_accelerate_vlogf(
+    const float *input,
+    float *output,
+    size_t len
+) {
+    int32_t count = (int32_t)len;
+    vvlogf(output, input, &count);
+}
+
+
 
 #endif 

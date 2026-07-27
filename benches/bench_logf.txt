@@ -1,4 +1,9 @@
 
 scalar
 scalar vex logf:  3.359 ns
-scalar math logf: 2.878 ns
+scalar math logf: 2.881 ns
+
+vectorized
+vector length:     4096
+vex vlogf:         4.635 us, 1.132 ns/element
+accelerate vvlogf: 5.155 us, 1.259 ns/element
