@@ -1,4 +1,4 @@
-//! test_expf_ulp.c
+//! test_logf_ulp.c
 //!
 //! sweeps over many float inputs and reports ULP errors.
 
@@ -6,15 +6,16 @@
 #include "vex.h"
 #include "test_helpers.h"
 
-#include <Accelerate/Accelerate.h>
+#include <float.h>
 #include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <Accelerate/Accelerate.h>
 
 #define VEC_LENGTH 4 
-const float OVERFLOW_BOUND = 88.37626f;
-const float UNDERFLOW_BOUND = -87.33654f;
+const float OVERFLOW_BOUND = FLT_MAX;  
+const float UNDERFLOW_BOUND = FLT_MIN; 
 
 
 void scalar(uint64_t n_samples) { 
@@ -40,14 +41,15 @@ void scalar(uint64_t n_samples) {
             idx 
         ); 
 
-        float vex_result = vex_expf(x); 
-        float lib_result = expf(x); 
+        float vex_result = vex_logf(x); 
+        float lib_result = logf(x); 
         record_ulp_result(&report, x, vex_result , lib_result); 
     }   
 
     display_ulp_report(&report);
     free_report(&report); 
 }
+
 
 void vectorized(uint64_t n_samples) { 
     if (n_samples < 2) { 
@@ -94,8 +96,8 @@ void vectorized(uint64_t n_samples) {
             .len  = (size_t) vec_len 
         }; 
 
-        vex_vexpf(vex_input, vex_output); 
-        vvexpf(lib_out, x, &vec_len); 
+        vex_vlogf(vex_input, vex_output); 
+        vvlogf(lib_out, x, &vec_len); 
 
         for (int32_t i = 0; i < vec_len; i++) { 
             record_ulp_result(&report, x[i], vex_out[i] , lib_out[i]);
@@ -106,14 +108,14 @@ void vectorized(uint64_t n_samples) {
     free_report(&report);
 }
 
-
 int main(void) { 
-    uint64_t n_samples = 1000000000; 
+    uint64_t n_samples = 100000000; 
 
-    printf("\nscalar expf\n"); 
+    printf("\nscalar logf\n"); 
     scalar(n_samples); 
-    printf("\nvectorized expf\n"); 
-    vectorized(n_samples);
+    printf("\nvectorized logf\n"); 
+    vectorized(n_samples); 
 
     return 0; 
 }
+
