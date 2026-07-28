@@ -14,7 +14,7 @@
 
 #define VEC_LENGTH 4 
 const float OVERFLOW_BOUND = 0x1p20f;
-const float UNDERFLOW_BOUND = FLT_MIN;
+const float UNDERFLOW_BOUND = -0x1p20f;
 
 
 void scalar(uint64_t n_samples) { 

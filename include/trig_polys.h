@@ -7,9 +7,9 @@
 
 
 static const double PI = 3.14159265358979323846264338327950288;
-static const double PIO2_HI = 1.5707963267948966;
-static const double PIO2_LO = 6.123233995736766e-17;
-static const double INV_PIO2 = 2 / PI; 
+static const double PIO2_HI = 0x1.921fb50000000p+0;
+static const double PIO2_LO = 0x1.110b4611a6263p-26; 
+static const double INV_PIO2 = 0x1.45f306dc9c883p-1;
 
 
 /// Approximates sin(x) with a degree-9 minimax over [-PI/4, PI/4] 

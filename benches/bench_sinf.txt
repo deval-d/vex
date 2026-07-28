@@ -1,0 +1,4 @@
+
+scalar
+scalar vex sinf:  3.878 ns
+scalar math sinf: 2.886 ns

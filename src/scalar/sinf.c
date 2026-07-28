@@ -10,53 +10,49 @@
 #include <math.h> 
 #include <stdint.h> 
 
-float vex_sinf(float x) {   
-    const float UNDERFLOW_BOUND = FLT_MIN;
-    const float OVERFLOW_BOUND = 0x1p20f; 
+inline float apply_sign(float value, uint32_t sign_mask){
+    return asfloat(asuint(value) ^ sign_mask);
+}
 
-    uint32_t bits = asuint(x); 
-    uint32_t ax = bits & 0x7fffffff; 
-    float pos_x = asfloat(ax); 
-
-    // +/- 0 and very small rounds to x 
-    if (pos_x < FLT_MIN) { 
-        return x; 
-    }
+float vex_sinf(float x) {  
+    // asuint(FLT_MAX) 
+    const uint32_t OVERFLOW_BOUND = 2138135039; 
+    const float UNDERFLOW_BOUND = FLT_MIN; 
 
     // INFINITY and NaN 
     if (!isfinite(x)) { 
         return x - x; 
     } 
 
-    // above 2^20, my n rounding fails 
-    if (pos_x > OVERFLOW_BOUND) { 
-        return NAN; 
+    uint32_t bits = asuint(x); 
+    float absx = asfloat(bits & 0x7fffffffu);
+    uint32_t sign_mask = bits & 0x80000000u;
+
+    // subnormals 
+    if (absx < UNDERFLOW_BOUND) { 
+        return x; 
     }
 
-    uint32_t sign = asuint(x) >> 31; 
-    // TODO: better n rounding  
-    int64_t n = (int32_t) round((double) pos_x * INV_PIO2);
+    double xd = (double) absx; 
+    double nd = round(xd * INV_PIO2); 
+    int32_t n = (int32_t) nd; 
+    uint32_t quadrant = n & 3; 
+
 
     // [-PI/4, PI/4] 
-    double r = ((double)pos_x - (double)n * PIO2_HI) - (double)n * PIO2_LO;
-
-    uint32_t quadrant = n & 3; 
+    double r  = (xd - nd * PIO2_HI) - nd * PIO2_LO; 
 
     float result; 
     switch (quadrant) { 
-        case 0: 
-            result = sin_poly(r); 
-            break; 
-        case 1: 
-            result = cos_poly(r); 
-            break; 
-        case 2: 
-            result = -sin_poly(r); 
-            break; 
-        default: 
-            result = -cos_poly(r); 
-            break; 
+        case 0:
+            return apply_sign(sin_poly(r), sign_mask);
+        case 1:
+            return apply_sign(cos_poly(r), sign_mask);
+        case 2:
+            return apply_sign(-sin_poly(r), sign_mask);
+        default:
+            return apply_sign(-cos_poly(r), sign_mask);
     }
 
-    return sign ? -result : result; 
+    return asfloat(asuint(result) ^ sign_mask);  
 }

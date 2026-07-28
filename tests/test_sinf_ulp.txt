@@ -1,0 +1,11 @@
+
+scalar sinf
+maximum ULP: 2
+from input: -1045408.437500
+vex measurement: 4.796704650e-01
+lib measurement: 4.796705246e-01
+ulp distribution
+0      97005782     97.005783%
+1      2991902      2.991902%
+2      2316         0.002316%
+total samples: 100000000
