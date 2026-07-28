@@ -1,4 +1,9 @@
 
 scalar
-scalar vex sinf:  3.878 ns
-scalar math sinf: 2.886 ns
+scalar vex sinf:  4.299 ns
+scalar math sinf: 2.880 ns
+
+vectorized
+vector length:     4096
+vex vsinf:         4.057 us, 0.991 ns/element
+accelerate vvsinf: 2.442 us, 0.596 ns/element

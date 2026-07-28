@@ -80,7 +80,10 @@ void vex_vexpf(FloatVectorRef v, FloatVectorMut out);
 /// where e is the true exponent of x, and f is the mantissa divided by two. 
 /// ln(2^(e + 1)) is approximated using `double`s. 
 /// ln(f) is approximated using a degree-8 minimax polynomial.
-void vex_vlogf(FloatVectorRef v, FloatVectorMut out); 
+void vex_vlogf(FloatVectorRef v, FloatVectorMut out);
+
+/// Computes sin(x) in parallel for multiple x. 
+void vex_vsinf(FloatVectorRef v, FloatVectorMut out); 
 
 
 #endif

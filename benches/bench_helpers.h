@@ -127,6 +127,32 @@ static inline void benchmark_accelerate_vlogf(
     vvlogf(output, input, &count);
 }
 
+static inline void benchmark_vex_vsinf(
+    const float *input,
+    float *output,
+    size_t len
+) {
+    FloatVectorRef in = {
+        .data = input,
+        .len = len,
+    };
 
+    FloatVectorMut out = {
+        .data = output,
+        .len = len,
+    };
+
+    vex_vsinf(in, out);
+
+}
+
+static inline void benchmark_accelerate_vsinf(
+    const float *input,
+    float *output,
+    size_t len
+) {
+    int32_t count = (int32_t)len;
+    vvsinf(output, input, &count);
+}
 
 #endif 
