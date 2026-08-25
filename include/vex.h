@@ -52,6 +52,25 @@ float vex_logf(float x);
 float vex_sinf(float x);
 
 
+/// Computes cos(x)
+float vex_cosf(float x);
+
+
+/// Computes tan(x)
+float vex_tanf(float x);
+
+
+/// Computes x^y.
+///
+/// Reduces the problem to
+///
+///     x^y = 2^(y log2(x)).
+///
+/// log2(x) is evaluated after splitting x into its exponent and mantissa.
+/// 2^z is evaluated after splitting z into an integer and a small fraction.
+float vex_powf(float x, float y);
+
+
 
 // vectorized functions 
 
@@ -84,6 +103,19 @@ void vex_vlogf(FloatVectorRef v, FloatVectorMut out);
 
 /// Computes sin(x) in parallel for multiple x. 
 void vex_vsinf(FloatVectorRef v, FloatVectorMut out); 
+
+/// Computes cos(x) in parallel for multiple x.
+void vex_vcosf(FloatVectorRef v, FloatVectorMut out);
+
+/// Computes tan(x) in parallel for multiple x.
+void vex_vtanf(FloatVectorRef v, FloatVectorMut out);
+
+/// Computes x^y in parallel for multiple pairs of x and y.
+void vex_vpowf(
+    FloatVectorRef bases,
+    FloatVectorRef exponents,
+    FloatVectorMut out
+);
 
 
 #endif
