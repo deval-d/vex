@@ -1,0 +1,9 @@
+scalar
+scalar vex tanf:  4.449 ns
+scalar math tanf: 3.492 ns
+
+vectorized
+vector length:     4096
+vex vtanf:         4.404 us, 1.075 ns/element
+accelerate vvtanf: 3.184 us, 0.777 ns/element
+
