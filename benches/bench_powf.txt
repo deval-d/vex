@@ -1,0 +1,9 @@
+scalar
+scalar vex powf:  13.082 ns
+scalar math powf: 4.316 ns
+
+vectorized
+vector length:     4096
+vex vpowf:         17.962 us, 4.385 ns/element
+accelerate vvpowf: 9.085 us, 2.218 ns/element
+

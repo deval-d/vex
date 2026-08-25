@@ -1,13 +1,14 @@
 //! vectorized/logf.c 
 //! 
 //! vectorized implementation of `logf(c)` 
-//! evaluates several in parallel 
+//! evaluates several in parallel.
 
 
 #include "vex.h" 
 #include <arm_neon.h>
 #include <assert.h> 
 #include <Accelerate/Accelerate.h> 
+
 
 #define LANES 4
 
@@ -55,6 +56,8 @@ void vex_vlogf(
     FloatVectorRef v,
     FloatVectorMut out
 ) { 
+    assert(v.len == out.len && "input and output vector lengths must match.");
+
     float LN2 = 0x1.62e43p-1f;
     const float32x4_t OVERFLOW_BOUND = vdupq_n_f32(FLT_MAX); 
     const float32x4_t UNDERFLOW_BOUND = vdupq_n_f32(FLT_MIN); 

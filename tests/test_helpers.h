@@ -27,6 +27,16 @@ typedef struct {
     float worst_lib;
 } ULPReport;
 
+typedef struct {
+    uint64_t n_samples;
+    size_t* counts;
+    uint32_t max_ulp;
+    float worst_x;
+    float worst_y;
+    float worst_vex;
+    float worst_lib;
+} BinaryULPReport;
+
 
 /// Returns true if actual is nearly_equal to expected else false
 static inline bool nearly_equal(float actual, float expected) {
@@ -181,6 +191,80 @@ static inline void record_ulp_result(
         : (size_t) ulp_diff; 
 
     report -> counts[index]++; 
+}
+
+
+static BinaryULPReport empty_binary_report(void) {
+    return (BinaryULPReport) {
+        .n_samples = 0,
+        .counts = NULL,
+        .max_ulp = 0,
+        .worst_x = 0.0f,
+        .worst_y = 0.0f,
+        .worst_vex = 0.0f,
+        .worst_lib = 0.0f
+    };
+}
+
+
+static void free_binary_report(BinaryULPReport* report) {
+    free(report -> counts);
+}
+
+
+static inline void display_binary_ulp_report(BinaryULPReport* report) {
+    if (report == NULL) {
+        printf("pointer is null.\n");
+    }
+
+    printf("maximum ULP: %" PRIu32 "\n", report -> max_ulp);
+    printf("from inputs: %f, %f\n", report -> worst_x, report -> worst_y);
+    printf("vex measurement: %.9e\n", report -> worst_vex);
+    printf("lib measurement: %.9e\n", report -> worst_lib);
+
+    uint64_t n_samples = report -> n_samples;
+    printf("ulp distribution\n");
+    for (size_t ulp = 0; ulp <= MAX_ULP; ulp++) {
+        size_t count = report -> counts[ulp];
+
+        if (count == 0) {
+            continue;
+        }
+
+        float percent = 100.0f * (float) count / (float) n_samples;
+
+        if (ulp == MAX_ULP) {
+            printf("%-6s %-12zu %f%%\n", "256+", count, percent);
+        } else {
+            printf("%-6zu %-12zu %f%%\n", ulp, count, percent);
+        }
+    }
+    printf("total samples: %" PRIu64 "\n", n_samples);
+}
+
+
+static inline void record_binary_ulp_result(
+    BinaryULPReport* report,
+    float x,
+    float y,
+    float vex_result,
+    float lib_result
+) {
+    uint32_t ulp_diff = ulp_distance(vex_result, lib_result);
+
+    if (ulp_diff > report -> max_ulp) {
+        report -> max_ulp = ulp_diff;
+        report -> worst_x = x;
+        report -> worst_y = y;
+        report -> worst_vex = vex_result;
+        report -> worst_lib = lib_result;
+    }
+
+    size_t index = ulp_diff >= MAX_ULP
+        ? MAX_ULP
+        : (size_t) ulp_diff;
+
+    report -> counts[index]++;
 }
 
 

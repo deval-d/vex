@@ -1,0 +1,19 @@
+scalar powf
+maximum ULP: 1
+from inputs: 0.000977, -0.067655
+vex measurement: 1.598312259e+00
+lib measurement: 1.598312140e+00
+ulp distribution
+0      99915335     99.915337%
+1      84665        0.084665%
+total samples: 100000000
+
+vectorized powf
+maximum ULP: 1
+from inputs: 0.000977, -6.485081
+vex measurement: 3.326878534e+19
+lib measurement: 3.326878754e+19
+ulp distribution
+0      97284597     97.284599%
+1      2715403      2.715403%
+total samples: 100000000
