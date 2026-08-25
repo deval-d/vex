@@ -1,0 +1,9 @@
+scalar
+scalar vex cosf:  3.447 ns
+scalar math cosf: 3.355 ns
+
+vectorized
+vector length:     4096
+vex vcosf:         3.831 us, 0.935 ns/element
+accelerate vvcosf: 2.497 us, 0.610 ns/element
+
